@@ -13,7 +13,7 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.Enable();
     }
      
-    public Vector2 GetMovementVector()
+    public Vector2 GetMovementVectorNormalised()
     {
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
         
