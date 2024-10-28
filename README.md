@@ -1,8 +1,7 @@
 # KitchenAction
 
-An Overcooked clone made by following the amazing [free course](https://www.youtube.com/watch?v=AmGSEH7QcDg) from Code Monkey.  
+An Overcooked clone made by following the amazing [free course](https://www.youtube.com/watch?v=AmGSEH7QcDg) from Code Monkey.
 I'm already quite experienced with Unity, both as a hobbyist and professionally, but this course is simply amazing, and I'm using it to refresh my Unity knowledge and will try to go through it in its entirety.
----
 
 ## Course Topics
 1. Unity Editor Layout
@@ -16,6 +15,7 @@ I'm already quite experienced with Unity, both as a hobbyist and professionally,
 9. C# Events
 10. Singletons
 11. Scriptable Objects
+12. Unity Interfaces
 
 ## Insights/Notes
 - Post-processing usually should be done at the end of the game, but since he already knows the finished product, we're doing it in the beginning to make our game already look fancy as we work on it.
