@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,15 +12,13 @@ public class Player : MonoBehaviour
  
     private bool isWalking;
     private Vector3 lastInteractDir;
-    
-    private void Update()
-    {
-        HandleMovement();
 
-        HandleInteractions();
+    private void Start()
+    {
+        gameInput.OnInteractAction += GameInput_OnHandleInteraction;
     }
 
-    private void HandleInteractions()
+    private void GameInput_OnHandleInteraction(object sender, System.EventArgs e)
     {
         Vector3 inputVector = gameInput.GetMovementVectorNormalised();
         
@@ -41,9 +40,42 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("-");
+            //Debug.Log("-");
         }
+    }
+
+    private void Update()
+    {
+        HandleMovement();
+
+        HandleInteractions();
+    }
+
+    private void HandleInteractions()
+    {
         
+        Vector3 inputVector = gameInput.GetMovementVectorNormalised();
+        
+        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+
+        if (moveDir != Vector3.zero)
+        {
+            lastInteractDir = moveDir;
+        }
+
+        float interactDistance = 2f;
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask))
+        {
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            {
+                // Has ClearCounter
+                
+            }
+        }
+        else
+        {
+            //Debug.Log("-");
+        }
         
     }
 
