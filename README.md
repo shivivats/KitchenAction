@@ -35,14 +35,20 @@ Below is a sort of recap of the course topics and then some notes for myself.
 - Refactoring with interfaces and base classes is a great way to maintain clean code (more below).
 - Make UI objects look at the camera for better UX and better game feel.
 - Coroutines can encourage a more convoluted programming paradigm so only use them if absolutely sure. `Float` timers with `Time.deltaTime` work perfectly fine in some cases.
-- Make a new script for any game object if it needs to have functionality. Try to avoid modifying an object after it's been instantiated, and instead make a new script for it and call some functionality from there instead.
+- Separate individual logic from total logic.
 - Empty scripts and `TryGetComponent` can be used in place of tags for singular game objects as tags use strings and strings aren't safe!
 - Texture `Wrap Mode` needs to be set to `Repeat` to ensure it works with manipulating UV in the Shader Graph.
+- Separate the sounds and the logic too! Same principle as with the visuals.
+- TMP materials need to have the full name of the font so that they can be chosen in the TMP inspector component.
 
 ### Separate Logic from Visuals!
 - Make a parent object that's in charge of the logic and its children are the visuals.
 - The logic should NOT be dependent on the visuals!
 - The visuals should be able to be changed without impacting the logic written at all!!
+
+### Separate Individual Logic from Total Logic
+- Make a new script for any game object if it needs to have functionality.
+- Try to avoid modifying an object after it's been instantiated, and instead make a new script for it and call some functionality implemented there instead.
 
 ### Refactoring
 - Do not be afraid of refactoring code.
