@@ -256,7 +256,7 @@ PrefabInstance:
     - target: {fileID: 8685039086493844790, guid: f8724179ff596ed4bb6dd712f981ffc9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 8685039086493844790, guid: f8724179ff596ed4bb6dd712f981ffc9,
         type: 3}
@@ -266,12 +266,12 @@ PrefabInstance:
     - target: {fileID: 8685039086493844790, guid: f8724179ff596ed4bb6dd712f981ffc9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8685039086493844790, guid: f8724179ff596ed4bb6dd712f981ffc9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000058114523
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8685039086493844790, guid: f8724179ff596ed4bb6dd712f981ffc9,
         type: 3}
@@ -281,7 +281,7 @@ PrefabInstance:
     - target: {fileID: 8685039086493844790, guid: f8724179ff596ed4bb6dd712f981ffc9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 8685039086493844790, guid: f8724179ff596ed4bb6dd712f981ffc9,
         type: 3}
@@ -296,7 +296,7 @@ PrefabInstance:
     - target: {fileID: 8685039086493844790, guid: f8724179ff596ed4bb6dd712f981ffc9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 8685039086493844790, guid: f8724179ff596ed4bb6dd712f981ffc9,
         type: 3}
@@ -351,4 +351,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterTopPoint: {fileID: 965048735524615009}
-  plateKitchenObjectSO: {fileID: 0}
+  plateKitchenObjectSO: {fileID: 11400000, guid: c76af1e8899c4734fac3010f9bf4cb65,
+    type: 2}
