@@ -18,11 +18,11 @@ public class PlatesCounterVisual : MonoBehaviour {
     }
 
     private void Start() {
-        platesCounter.OnPlateSpawned += PlatesCounterOnOnPlateSpawned;
-        platesCounter.OnPlateRemoved += PlatesCounterOnOnPlateRemoved;
+        platesCounter.OnPlateSpawned += PlatesCounter_OnPlateSpawned;
+        platesCounter.OnPlateRemoved += PlatesCounter_OnPlateRemoved;
     }
 
-    private void PlatesCounterOnOnPlateRemoved(object sender, EventArgs e) {
+    private void PlatesCounter_OnPlateRemoved(object sender, EventArgs e) {
         GameObject plateGameObject = plateVisualGameObjectList[plateVisualGameObjectList.Count - 1];
         
         plateVisualGameObjectList.Remove(plateGameObject);
@@ -30,7 +30,7 @@ public class PlatesCounterVisual : MonoBehaviour {
         Destroy(plateGameObject);
     }
 
-    private void PlatesCounterOnOnPlateSpawned(object sender, EventArgs e) {
+    private void PlatesCounter_OnPlateSpawned(object sender, EventArgs e) {
         Transform plateVisualTransform = Instantiate(plateVisualPrefab, counterTopPoint);
         
         float plateOffsetY = 0.1f;

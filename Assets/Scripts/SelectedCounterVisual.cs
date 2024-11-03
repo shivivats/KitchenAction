@@ -10,10 +10,10 @@ public class SelectedCounterVisual : MonoBehaviour {
     [SerializeField] private GameObject[] visualGameObjects;
 
     private void Start() {
-        Player.Instance.OnSelectedCounterChanged += Player_OnOnSelectedCounterChanged;
+        Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
     }
 
-    private void Player_OnOnSelectedCounterChanged(object sender, Player.OnSelectedCounterChangedEventArgs e) {
+    private void Player_OnSelectedCounterChanged(object sender, Player.OnSelectedCounterChangedEventArgs e) {
         if (e.selectedCounter == baseCounter) {
             Show();
         } else {
