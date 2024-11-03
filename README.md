@@ -23,6 +23,8 @@ Below is a sort of recap of the course topics and then some notes for myself.
 15. Basic State Machines using Enums
 16. Serializable Custom Structs
 17. Shader Graph Basic Repeat Shader
+18. UI Templates (and difference from Prefabs)
+18. BG Music and SFX
 
 ## Insights/Notes
 - Post-processing usually should be done at the end of the game, but since he already knows the finished product, we're doing it in the beginning to make our game already look fancy as we work on it.
@@ -40,6 +42,7 @@ Below is a sort of recap of the course topics and then some notes for myself.
 - Texture `Wrap Mode` needs to be set to `Repeat` to ensure it works with manipulating UV in the Shader Graph.
 - Separate the sounds and the logic too! Same principle as with the visuals.
 - TMP materials need to have the full name of the font so that they can be chosen in the TMP inspector component.
+- Single-use UI templates can be kept as an inactive child to the container where they'll be used. They can be used as prefabs, however that would clutter up the assets and this way they are kept where they are used.
 
 ### Separate Logic from Visuals!
 - Make a parent object that's in charge of the logic and its children are the visuals.

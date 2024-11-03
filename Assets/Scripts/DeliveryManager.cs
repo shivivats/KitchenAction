@@ -9,6 +9,9 @@ public class DeliveryManager : MonoBehaviour {
 
     public event EventHandler OnRecipeSpawned;
     public event EventHandler OnRecipeCompleted;
+
+    public event EventHandler OnRecipeSuccess;
+    public event EventHandler OnRecipeFailed;
     
     // We could have also referenced a list of all the recipes here directly
     // But this approach has the advantage of if we need another object to refer to all the recipes then we dont need to modify them one by one but rather we can just modify this RecipeListSO
@@ -67,6 +70,7 @@ public class DeliveryManager : MonoBehaviour {
                     Debug.Log("Player delivered the correct recipe!");
                     waitingRecipeSOList.Remove(waitingRecipeSO);
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+                    OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
                     return;
                 }
             }
@@ -75,6 +79,7 @@ public class DeliveryManager : MonoBehaviour {
         // No matches found!
         // Player did not deliver a correct recipe
         Debug.Log("Player did not deliver a correct recipe!");
+        OnRecipeFailed?.Invoke(this, EventArgs.Empty);
     }
 
     public List<RecipeSO> GetWaitingRecipeSOList() {
