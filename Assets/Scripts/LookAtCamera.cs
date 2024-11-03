@@ -3,22 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LookAtCamera : MonoBehaviour
-{
-
+public class LookAtCamera : MonoBehaviour {
     private enum Mode {
         LookAt,
         LookAtInverted,
         CameraForward,
         CameraForwardInverted
     }
-    
+
     [SerializeField] private Mode lookAtMode;
-    
+
     // Start is called before the first frame update
     private void LateUpdate() {
         switch (lookAtMode) {
-            case Mode.LookAt: 
+            case Mode.LookAt:
                 transform.LookAt(Camera.main.transform);
                 break;
             case Mode.LookAtInverted:

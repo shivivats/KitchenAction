@@ -12,7 +12,7 @@ public class ContainerCounter : BaseCounter, IKitchenObjectParent {
         if (!player.HasKitchenObject()) {
             // spawn an object and give it to the player
             KitchenObject.SpawnKitchenObject(kitchenObjectSO, player);
-            
+
             OnPlayerGrabedObject?.Invoke(this, EventArgs.Empty);
         }
     }

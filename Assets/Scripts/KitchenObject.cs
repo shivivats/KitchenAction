@@ -13,14 +13,18 @@ public class KitchenObject : MonoBehaviour {
 
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {
         // First clear the kitchen object from the current/previous parent
-        if (this.kitchenObjectParent != null) this.kitchenObjectParent.ClearKitchenObject();
+        if (this.kitchenObjectParent != null) {
+            this.kitchenObjectParent.ClearKitchenObject();
+        }
 
         // Set kitchen object in the new parent
         this.kitchenObjectParent = kitchenObjectParent;
 
         if (kitchenObjectParent.HasKitchenObject())
             // this should never happen so output an error
+        {
             Debug.LogError("Parent already has a kitchen object!");
+        }
 
         kitchenObjectParent.SetKitchenObject(this);
 
@@ -41,11 +45,11 @@ public class KitchenObject : MonoBehaviour {
     public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO,
         IKitchenObjectParent kitchenObjectParent) {
         Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
-        
+
         KitchenObject kitchenObject = kitchenObjectTransform.GetComponent<KitchenObject>();
-        
+
         kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
-        
+
         return kitchenObject;
     }
 }

@@ -26,7 +26,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     private BaseCounter selectedCounter;
 
     private void Awake() {
-        if (Instance != null) Debug.LogError("There is more than one player instance!");
+        if (Instance != null) {
+            Debug.LogError("There is more than one player instance!");
+        }
+
         Instance = this;
     }
 
@@ -36,11 +39,15 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     }
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
-        if (selectedCounter != null) selectedCounter.InteractAlternate(this);
+        if (selectedCounter != null) {
+            selectedCounter.InteractAlternate(this);
+        }
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e) {
-        if (selectedCounter != null) selectedCounter.Interact(this);
+        if (selectedCounter != null) {
+            selectedCounter.Interact(this);
+        }
     }
 
     private void Update() {
@@ -52,42 +59,44 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     private void HandleInteractions() {
         Vector3 inputVector = gameInput.GetMovementVectorNormalised();
 
-        var moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
-        if (moveDir != Vector3.zero) lastInteractDir = moveDir;
+        if (moveDir != Vector3.zero) {
+            lastInteractDir = moveDir;
+        }
 
-        var interactDistance = 2f;
-        if (Physics.Raycast(transform.position, lastInteractDir, out var raycastHit, interactDistance,
+        float interactDistance = 2f;
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance,
                 countersLayerMask)) {
             if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter)) {
                 // Has ClearCounter
-                if (baseCounter != selectedCounter) SetSelectedCounter(baseCounter);
-            }
-            else {
+                if (baseCounter != selectedCounter) {
+                    SetSelectedCounter(baseCounter);
+                }
+            } else {
                 SetSelectedCounter(null);
             }
-        }
-        else {
+        } else {
             SetSelectedCounter(null);
         }
     }
 
     private void HandleMovement() {
-        var inputVector = gameInput.GetMovementVectorNormalised();
+        Vector2 inputVector = gameInput.GetMovementVectorNormalised();
 
-        var moveDir = new Vector3(inputVector.x, 0, inputVector.y);
+        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
 
-        var moveDistance = moveSpeed * Time.deltaTime;
-        var playerRadius = 0.7f;
-        var playerHeight = 2f;
-        var canMove = !Physics.CapsuleCast(transform.position,
+        float moveDistance = moveSpeed * Time.deltaTime;
+        float playerRadius = 0.7f;
+        float playerHeight = 2f;
+        bool canMove = !Physics.CapsuleCast(transform.position,
             transform.position + Vector3.up * playerHeight,
             playerRadius, moveDir, moveDistance);
 
         if (!canMove) {
             // cannot move towards moveDir
 
-            var moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
+            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
             canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position,
                 transform.position + Vector3.up * playerHeight,
                 playerRadius, moveDirX, moveDistance);
@@ -95,11 +104,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
             if (canMove) {
                 // can move only on the X axis
                 moveDir = moveDirX;
-            }
-            else {
+            } else {
                 // cannot move on the X
                 // attempt movement on the Z
-                var moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
 
                 canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position,
                     transform.position + Vector3.up * playerHeight,
@@ -108,18 +116,19 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
                 if (canMove) {
                     // can move only on the Z
                     moveDir = moveDirZ;
-                }
-                else {
+                } else {
                     // cannot move on neither X nor Z
                 }
             }
         }
 
-        if (canMove) transform.position += moveDir * moveDistance;
+        if (canMove) {
+            transform.position += moveDir * moveDistance;
+        }
 
         isWalking = moveDir != Vector3.zero;
 
-        var rotateSpeed = 10f;
+        float rotateSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
     }
 

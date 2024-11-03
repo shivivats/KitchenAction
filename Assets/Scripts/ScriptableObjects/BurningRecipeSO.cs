@@ -7,5 +7,5 @@ using UnityEngine;
 public class BurningRecipeSO : ScriptableObject {
     public KitchenObjectSO input;
     public KitchenObjectSO output;
-    public int cuttingAmountMax;
+    public int burningTimerMax;
 }
