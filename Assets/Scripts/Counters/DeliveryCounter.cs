@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeliveryCounter : MonoBehaviour
+public class DeliveryCounter : BaseCounter
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public override void Interact(Player player) {
+        if (player.HasKitchenObject()) {
+            if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject)) {
+                // only accepts plate
+                player.GetKitchenObject().DestroySelf();
+            }
+        }
     }
 }
