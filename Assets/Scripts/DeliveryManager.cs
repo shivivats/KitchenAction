@@ -6,6 +6,9 @@ using Random = UnityEngine.Random;
 
 public class DeliveryManager : MonoBehaviour {
     
+    public static DeliveryManager Instance { get; private set; }
+    
+    
     // We could have also referenced a list of all the recipes here directly
     // But this approach has the advantage of if we need another object to refer to all the recipes then we dont need to modify them one by one but rather we can just modify this RecipeListSO
     [SerializeField] private RecipeListSO recipeListSO;
@@ -16,6 +19,7 @@ public class DeliveryManager : MonoBehaviour {
     private int waitingRecipesMax = 4;
 
     private void Awake() {
+        Instance = this;
         waitingRecipeSOList = new List<RecipeSO>();
     }
 
@@ -30,5 +34,42 @@ public class DeliveryManager : MonoBehaviour {
                 waitingRecipeSOList.Add(waitingRecipeSO);
             }
         }
+    }
+
+    public void DeliverRecipe(PlateKitchenObject plateKitchenObject) {
+        foreach (RecipeSO waitingRecipeSO in waitingRecipeSOList) {
+            if (waitingRecipeSO.kitchenObjectSOList.Count == plateKitchenObject.GetKitchenObjectSOList().Count) {
+                // same number of ingredients
+                bool plateContentsMatchesRecipe = true;
+                foreach (KitchenObjectSO recipeKitchenObjectSO in waitingRecipeSO.kitchenObjectSOList) {
+                    // cycling through all the ingredients in the recipe
+                    bool ingredientFound = false;
+                    foreach (KitchenObjectSO plateKitchenObjectSO in plateKitchenObject.GetKitchenObjectSOList()) {
+                        // cycling through all the ingredients on the plate
+                        if (plateKitchenObjectSO == recipeKitchenObjectSO) {
+                            // ingredient matches!
+                            ingredientFound = true;
+                            break;
+                        }
+                    }
+
+                    if (!ingredientFound) {
+                        // one ingredient from the recipe is not found in the plate!
+                        plateContentsMatchesRecipe = false;
+                    }
+                }
+
+                if (plateContentsMatchesRecipe) {
+                    // Player delivered the correct recipe
+                    Debug.Log("Player delivered the correct recipe!");
+                    waitingRecipeSOList.Remove(waitingRecipeSO);
+                    return;
+                }
+            }
+        }
+        
+        // No matches found!
+        // Player did not deliver a correct recipe
+        Debug.Log("Player did not deliver a correct recipe!");
     }
 }
