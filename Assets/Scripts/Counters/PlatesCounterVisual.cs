@@ -1,18 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatesCounterVisual : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class PlatesCounterVisual : MonoBehaviour {
+    
+    [SerializeField] private Transform counterTopPoint;
+    [SerializeField] private Transform plateVisualPrefab;
+    
+    [SerializeField] private PlatesCounter platesCounter;
+
+    private float plateOffsetY = 0.1f;
+
+    private List<GameObject> plateVisualGameObjectList;
+
+
+    private void Awake() {
+        plateVisualGameObjectList = new List<GameObject>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void Start() {
+        platesCounter.OnPlateSpawned += PlatesCounterOnOnPlateSpawned;
+        platesCounter.OnPlateRemoved += PlatesCounterOnOnPlateRemoved;
+    }
+
+    private void PlatesCounterOnOnPlateRemoved(object sender, EventArgs e) {
+        GameObject plateGameObject = plateVisualGameObjectList[plateVisualGameObjectList.Count - 1];
+        plateVisualGameObjectList.Remove(plateGameObject);
+        Destroy(plateGameObject);
+    }
+
+    private void PlatesCounterOnOnPlateSpawned(object sender, EventArgs e) {
+        Transform plateVisualTransform = Instantiate(plateVisualPrefab, counterTopPoint);
+        plateVisualTransform.localPosition = new Vector3(0, plateOffsetY * plateVisualGameObjectList.Count, 0);
         
+        plateVisualGameObjectList.Add(plateVisualTransform.gameObject);
     }
 }
