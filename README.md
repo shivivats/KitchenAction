@@ -22,6 +22,7 @@ Below is a sort of recap of the course topics and then some notes for myself.
 14. UI Look at Camera
 15. Basic State Machines using Enums
 16. Serializable Custom Structs
+17. Shader Graph Basic Repeat Shader
 
 ## Insights/Notes
 - Post-processing usually should be done at the end of the game, but since he already knows the finished product, we're doing it in the beginning to make our game already look fancy as we work on it.
@@ -36,6 +37,7 @@ Below is a sort of recap of the course topics and then some notes for myself.
 - Coroutines can encourage a more convoluted programming paradigm so only use them if absolutely sure. `Float` timers with `Time.deltaTime` work perfectly fine in some cases.
 - Make a new script for any game object if it needs to have functionality. Try to avoid modifying an object after it's been instantiated, and instead make a new script for it and call some functionality from there instead.
 - Empty scripts and `TryGetComponent` can be used in place of tags for singular game objects as tags use strings and strings aren't safe!
+- Texture `Wrap Mode` needs to be set to `Repeat` to ensure it works with manipulating UV in the Shader Graph.
 
 ### Separate Logic from Visuals!
 - Make a parent object that's in charge of the logic and its children are the visuals.
